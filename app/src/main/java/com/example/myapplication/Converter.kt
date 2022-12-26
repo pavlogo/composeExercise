@@ -7,8 +7,8 @@ import java.math.RoundingMode
 //        print("Conversion result: ")
 
 fun main() {
-    println("base to dec " + toDec("1010100001000110000000001", "2"))
-    println("dec to num " + (fromDec(toDec("1010100001000110000000001", "2"), "16")))
+    println("base to dec " + toDec("101010AAA1", "11"))
+    println("dec to num " + (fromDec(toDec("101010AAA1", "11"), "26")))
 }
 
 fun toDec(number: String, baza: String): String {
