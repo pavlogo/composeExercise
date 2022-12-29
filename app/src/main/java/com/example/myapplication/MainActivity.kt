@@ -25,6 +25,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import java.text.NumberFormat
+import java.util.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -137,10 +139,7 @@ internal fun calculateTip(
     var tip = tipPercent / 100 * amount
     if (roundUp)
         tip = kotlin.math.ceil(tip)
-    return "$tip $"
-//    NumberFormat.getCurrencyInstance(tip)
-
-
+    return NumberFormat.getCurrencyInstance(Locale.US).format(tip)
 }
 
 @Composable
