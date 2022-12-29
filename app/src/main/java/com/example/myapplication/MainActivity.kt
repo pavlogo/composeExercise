@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -24,7 +25,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +110,7 @@ fun TipTimeScreen() {
 }
 
 @Composable
-fun EditNumberField(
+private fun EditNumberField(
     @StringRes label: Int,
     value: String,
     keyboardOptions: KeyboardOptions,
@@ -128,20 +128,23 @@ fun EditNumberField(
         keyboardActions = keyboardActions
     )
 }
-
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
-    tipPercent: Double = 15.0,
+    tipPercent: Double = 15.00,
     roundUp: Boolean,
     ): String {
     var tip = tipPercent / 100 * amount
     if (roundUp)
         tip = kotlin.math.ceil(tip)
-    return NumberFormat.getCurrencyInstance().format(tip)
+    return "$tip $"
+//    NumberFormat.getCurrencyInstance(tip)
+
+
 }
 
 @Composable
-fun RoundTheTipRow(
+private fun RoundTheTipRow(
     roundUp: Boolean,
     onRoundUpChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier
